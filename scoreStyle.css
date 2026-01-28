@@ -21,7 +21,7 @@ html, body {
 
 .backButton {
     background: none;
-    border: none;
+    border-radius: 15%;
     padding: 0;
     
    
