@@ -48,10 +48,10 @@ function renderGame() {
     const crossBtn = document.getElementById('cross-button');
 
     if (boatPosition === 'left') {
-        crossBtn.innerHTML = "Llevar ⬅";
+        crossBtn.innerHTML = "Llevar ➡";
         boatEl.classList.remove('boat-flipped');
     } else {
-        crossBtn.innerHTML = "Llevar ➡";
+        crossBtn.innerHTML = "Llevar ⬅";
         boatEl.classList.add('boat-flipped');
     }
     checkGameOver();
@@ -69,21 +69,43 @@ function resetGame() {
 
 function checkGameOver() {
     let message = "";
+    let isGameOver = false;
+    let isVictory = false;
+    
     if ((leftShore.includes('wolf') && leftShore.includes('sheep') && !leftShore.includes('farmer')) ||
         (rightShore.includes('wolf') && rightShore.includes('sheep') && !rightShore.includes('farmer'))) {
-        message = '¡El lobo se comió a la oveja! Juego Terminado.';
+        message = '¡El lobo se comió a la oveja!';
+        isGameOver = true;
     } else if ((leftShore.includes('sheep') && leftShore.includes('lettuce') && !leftShore.includes('farmer')) ||
         (rightShore.includes('sheep') && rightShore.includes('lettuce') && !rightShore.includes('farmer'))) {
-        message = '¡La oveja se comió la lechuga! Juego Terminado.';
-    } else if (rightShore.length === 4) { // Condición de victoria simplificada
-        message = '¡Felicidades! Has cruzado con éxito el río.';
+        message = '¡La oveja se comió la lechuga!';
+        isGameOver = true;
+    } else if (rightShore.length === 4) {
+        message = '¡Has cruzado con éxito el río!';
+        isVictory = true;
     }
 
-    if (message) {
-        // Usamos un pequeño delay para que el render se complete antes del alert
+    if (isVictory) {
         setTimeout(() => {
-            alert(message);
-            resetGame();
+            Notiflix.Report.success(
+                '¡Felicidades! 🎉',
+                message,
+                'Jugar de nuevo',
+                function() {
+                    resetGame();
+                }
+            );
+        }, 100);
+    } else if (isGameOver) {
+        setTimeout(() => {
+            Notiflix.Report.failure(
+                'Game Over 😢',
+                message,
+                'Reintentar',
+                function() {
+                    resetGame();
+                }
+            );
         }, 100);
     }
 }
