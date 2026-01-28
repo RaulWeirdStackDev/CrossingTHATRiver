@@ -85,17 +85,21 @@ function checkGameOver() {
     let message = "";
     let isGameOver = false;
     let isVictory = false;
+    let imageUrl = "";
     
     if ((leftShore.includes('wolf') && leftShore.includes('sheep') && !leftShore.includes('farmer')) ||
         (rightShore.includes('wolf') && rightShore.includes('sheep') && !rightShore.includes('farmer'))) {
         message = '¡El lobo se comió a la oveja!';
+        imageUrl = 'assets/img/defeatW.png';
         isGameOver = true;
     } else if ((leftShore.includes('sheep') && leftShore.includes('lettuce') && !leftShore.includes('farmer')) ||
         (rightShore.includes('sheep') && rightShore.includes('lettuce') && !rightShore.includes('farmer'))) {
         message = '¡La oveja se comió la lechuga!';
+        imageUrl = 'assets/img/defeatS.png';
         isGameOver = true;
     } else if (rightShore.length === 4) {
         message = '¡Has cruzado con éxito el río!';
+        imageUrl = 'assets/img/victory.png';
         isVictory = true;
     }
 
@@ -103,7 +107,7 @@ function checkGameOver() {
         setTimeout(() => {
             Notiflix.Report.success(
                 '¡Felicidades! 🎉',
-                message,
+                `<img src="${imageUrl}" style="width: 150px; margin: 15px auto; display: block; border-radius: 10px;"><br>${message}`,
                 'Volver al menú',
                 function() {
                     resetGame();
@@ -114,7 +118,7 @@ function checkGameOver() {
         setTimeout(() => {
             Notiflix.Report.failure(
                 'Game Over 😢',
-                message,
+                `<img src="${imageUrl}" style="width: 150px; margin: 15px auto; display: block; border-radius: 10px;"><br>${message}`,
                 'Volver al menú',
                 function() {
                     resetGame();
