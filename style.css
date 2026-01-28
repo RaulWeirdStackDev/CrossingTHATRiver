@@ -1,0 +1,181 @@
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Press+Start+2P', monospace; 
+    color: black; 
+}
+
+header {text-align: center;}
+
+#game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0; /* Eliminamos el gap para que no haya grietas en el paisaje */
+    flex-grow: 1;
+    margin: 10px;
+    
+    /* Nueva configuración de fondo */
+    background-image: url('./assets/img/river.png'); /* Asegúrate de que la ruta sea correcta */
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px; /* Opcional, para redondear las esquinas del tablero */
+    overflow: hidden;
+}
+
+.shore {
+    width: 150px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: transparent;
+}
+
+#river {
+    width: 350px;
+    height: 120px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* ESTA ES LA LÍNEA CLAVE - centra el bote */
+    transition: justify-content 0.5s ease-in-out;
+}
+
+#boat {
+    width: 90px;
+    height: 40px;
+    background-image: url('./assets/img/boat.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+.boat-flipped {
+    transform: scaleX(-1);
+}
+
+.character-img {
+    width: 50px;  /* Ajusta según el tamaño de tu orilla */
+    height: 50px;
+    object-fit: contain; /* Mantiene la proporción de la imagen */
+    image-rendering: pixelated; /* Si tus imágenes son pixel art, esto las mantiene nítidas */
+}
+.contenedor {
+    display: flex;
+    justify-content: space-around; 
+    width: 100%; 
+    max-width: 800px; 
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Solo para pantallas mayores a 1024px (Desktop) */
+@media screen and (min-width: 1024px) {
+    #game-container {
+        width: 90%;
+        max-width: 1200px;
+        height: 500px;
+        margin: 30px auto;
+        
+        background-image: url('./assets/img/riverDesktop.png'); 
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 4px solid #4a332d;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        position: relative;
+        overflow: visible; /* Permite que los personajes sobresalgan si es necesario */
+    }
+
+    .shore {
+        width: 22%;
+        height: 90%; /* Reducimos un poco para dar margen arriba y abajo */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px; /* Reducimos el gap para que quepan mejor */
+        padding: 25px 10px; /* Más padding arriba y abajo */
+        background-color: transparent;
+        z-index: 2;
+    }
+
+    #river {
+        width: 56%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        position: relative;
+    }
+
+    #boat {
+        width: 180px;
+        height: 100px;
+        background-image: url('./assets/img/boat.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Cuando el bote está en la orilla izquierda */
+    #river.left {
+        justify-content: flex-start;
+        padding-left: 5%;
+    }
+
+    /* Cuando el bote está en la orilla derecha */
+    #river.right {
+        justify-content: flex-end;
+        padding-right: 5%;
+    }
+
+    .character-img {
+        width: 75px; /* Reducimos ligeramente el tamaño */
+        height: 75px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .character-img:hover {
+        transform: scale(1.1);
+    }
+
+    /* Personajes en el bote */
+    #boat .character-img {
+        width: 50px;
+        height: 50px;
+    }
+}
