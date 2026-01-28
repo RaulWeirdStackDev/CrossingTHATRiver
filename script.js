@@ -60,11 +60,7 @@ function renderGame() {
 
 
 function resetGame() {
-    leftShore = ['farmer', 'wolf', 'sheep', 'lettuce'];
-    rightShore = [];
-    boat = [];
-    boatPosition = 'left';
-    renderGame();
+    window.location.href = 'index.html';
 }
 
 function checkGameOver() {
