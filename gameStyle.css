@@ -90,6 +90,11 @@ button {
     transition: all 0.2s ease;
 }
 
+#resetBtn{
+    background: linear-gradient(180deg, #ff0000 0%, #bd5f01 100%);
+    border: 3px solid #8b3a02;
+}
+
 button:hover {
     background: linear-gradient(180deg, #9CCC65 0%, #7CB342 100%);
     transform: translateY(-2px);
@@ -141,6 +146,14 @@ button:disabled {
 
 .button-move:hover {
     background: linear-gradient(180deg, #BCAAA4 0%, #A1887F 100%);
+}
+
+#controls{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 a {
@@ -245,10 +258,13 @@ footer {
         width: 50px;
         height: 50px;
     }
-#controls{
+
+    #controls{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
+
 }
