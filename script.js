@@ -86,7 +86,7 @@ function checkGameOver() {
             Notiflix.Report.success(
                 '¡Felicidades! 🎉',
                 message,
-                'Jugar de nuevo',
+                'Volver al menú',
                 function() {
                     resetGame();
                 }
@@ -97,7 +97,7 @@ function checkGameOver() {
             Notiflix.Report.failure(
                 'Game Over 😢',
                 message,
-                'Reintentar',
+                'Volver al menú',
                 function() {
                     resetGame();
                 }
