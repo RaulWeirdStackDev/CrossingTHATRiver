@@ -19,39 +19,34 @@ html, body {
     justify-content: center;
 }
 
-.startButton {
-    background: none;
-    border: none;
-    padding: 0;
-    
-   
+.buttonContainer {
     position: absolute;
-    bottom: 120px; /* Distancia desde el borde inferior */
-    left: 47%;
-    transform: translateX(-50%); 
+    bottom: 120px; /* Distancia original para móvil */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px; /* Espacio entre los dos botones */
+    justify-content: center;
+    align-items: center;
 }
 
-.startButton img {
-    width: 80px; /* Ajusta el tamaño a tu gusto */
+.navButton img {
+    width: 80px;
     height: auto;
     cursor: pointer;
     transition: transform 0.2s;
 }
 
-/* Efecto opcional para que se note el click */
-.startButton img:hover {
+.navButton img:hover {
     transform: scale(1.1);
 }
 
+
 @media screen and (min-width: 1024px) {
-.startButton {
-    background: none;
-    border: none;
-    padding: 0;
-    
-    /* Posicionamiento manual */
-    position: absolute;
-    bottom: 12px; /* Distancia desde el borde inferior */
-    left: 47%;
-    transform: translateX(-50%); /* Lo centra horizontalmente */
-}}
+    .buttonContainer {
+        left: 48%;
+        bottom: 20px; /* Ajustado para que quepan ambos verticalmente */
+        flex-direction: column; /* AQUÍ: Cambia a uno sobre el otro */
+        gap: 10px; /* Espacio vertical entre botones */
+    }
+}

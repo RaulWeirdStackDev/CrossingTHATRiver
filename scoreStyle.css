@@ -1,0 +1,57 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.scoreBody {
+    background-image: url('./assets/img/hiScores.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #051926;
+    margin: 0;
+    min-height: 100vh;
+    
+    /* Importante: permite que el botón se posicione respecto al body */
+    position: relative; 
+    display: flex;
+    justify-content: center;
+}
+
+.backButton {
+    background: none;
+    border: none;
+    padding: 0;
+    
+   
+    position: absolute;
+    bottom: 120px; /* Distancia desde el borde inferior */
+    left: 47%;
+    transform: translateX(-50%); 
+}
+
+.startButton img {
+    width: 80px; /* Ajusta el tamaño a tu gusto */
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+/* Efecto opcional para que se note el click */
+.startButton img:hover {
+    transform: scale(1.1);
+}
+
+@media screen and (min-width: 1024px) {
+.startButton {
+    background: none;
+    border: none;
+    padding: 0;
+    
+    /* Posicionamiento manual */
+    position: absolute;
+    bottom: 12px; /* Distancia desde el borde inferior */
+    left: 47%;
+    transform: translateX(-50%); /* Lo centra horizontalmente */
+}}
