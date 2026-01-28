@@ -3,6 +3,24 @@ let rightShore = [];
 let boat = [];
 let boatPosition = 'left';
 
+Notiflix.Report.init({
+    titleFontSize: '24px',
+    messageFontSize: '16px',
+    buttonFontSize: '15px',
+    cssAnimationStyle: 'zoom',
+    plainText: false,
+    rtl: false,
+    svgSize: '80px',
+    messageMaxLength: 3000,
+    backOverlay: true,
+    backgroundColor: '#f8f8f8',
+    borderRadius: '8px',
+    
+    // Estas propiedades centran el contenido
+    cssAnimation: true,
+    cssAnimationDuration: 360,
+});
+
 function getImage(char) {
     const images = {
         'farmer': 'assets/img/farmer.png',
