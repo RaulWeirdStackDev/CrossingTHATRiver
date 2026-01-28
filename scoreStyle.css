@@ -31,7 +31,7 @@ html, body {
     transform: translateX(-50%); 
 }
 
-.startButton img {
+.backButton img {
     width: 80px; /* Ajusta el tamaño a tu gusto */
     height: auto;
     cursor: pointer;
@@ -39,15 +39,17 @@ html, body {
 }
 
 /* Efecto opcional para que se note el click */
-.startButton img:hover {
+.backButton img:hover {
     transform: scale(1.1);
 }
 
 @media screen and (min-width: 1024px) {
-.startButton {
+.backButton {
     background: none;
     border: none;
     padding: 0;
+    height: 50px;
+    width: auto;
     
     /* Posicionamiento manual */
     position: absolute;
