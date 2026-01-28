@@ -76,12 +76,71 @@ header {text-align: center;}
     max-width: 800px; 
 }
 
+button {
+    background: linear-gradient(180deg, #8BC34A 0%, #689F38 100%);
+    border: 3px solid #558B2F;
+    border-radius: 8px;
+    padding: 2px 4px;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 16px;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
 button:hover {
-    background-color: #ddd;
+    background: linear-gradient(180deg, #9CCC65 0%, #7CB342 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón estilo "agua/río" - para acciones secundarias */
+.button-water {
+    background: linear-gradient(180deg, #4DD0E1 0%, #26C6DA 100%);
+    border: 3px solid #0097A7;
+}
+
+.button-water:hover {
+    background: linear-gradient(180deg, #80DEEA 0%, #4DD0E1 100%);
+}
+
+/* Botón estilo "Start" - dorado/destacado */
+.button-start {
+    background: linear-gradient(180deg, #FFD54F 0%, #FFC107 100%);
+    border: 3px solid #FFA000;
+    color: #1B3A1F;
+    font-size: 20px;
+    padding: 16px 40px;
+}
+
+.button-start:hover {
+    background: linear-gradient(180deg, #FFE082 0%, #FFD54F 100%);
+}
+
+/* Botón deshabilitado */
+button:disabled {
+    background: linear-gradient(180deg, #9E9E9E 0%, #757575 100%);
+    border-color: #616161;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Botones de movimiento del juego */
+.button-move {
+    background: linear-gradient(180deg, #A1887F 0%, #8D6E63 100%);
+    border: 3px solid #6D4C41;
+    min-width: 120px;
+}
+
+.button-move:hover {
+    background: linear-gradient(180deg, #BCAAA4 0%, #A1887F 100%);
 }
 
 a {
@@ -186,4 +245,9 @@ footer {
         width: 50px;
         height: 50px;
     }
+.controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 }
