@@ -14,7 +14,7 @@ header {text-align: center;}
     justify-content: center;
     align-items: center;
     gap: 0; /* Eliminamos el gap para que no haya grietas en el paisaje */
-    flex-grow: 1;
+
     margin: 10px;
     
     /* Nueva configuración de fondo */
@@ -22,7 +22,7 @@ header {text-align: center;}
     background-size: cover;
     background-position: center;
     border-radius: 10px; /* Opcional, para redondear las esquinas del tablero */
-    overflow: hidden;
+
 }
 
 .shore {
