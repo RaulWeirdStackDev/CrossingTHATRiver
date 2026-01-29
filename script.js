@@ -193,17 +193,21 @@ function getFormattedTime() {
 
 
 renderGame();
-
 async function guardarPuntaje(nombre, tiempo) {
     try {
-        await fetch('https://riverbackend.onrender.com/puntajes', {
+        const response = await fetch('https://riverbackend.onrender.com/puntajes', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nombre, tiempo })
         });
-        resetGame(); // Ahora sí redirige a hiScores.html
+
+        if (response.ok) {
+            console.log("¡Puntaje guardado con éxito!");
+        }
     } catch (error) {
-        console.error("Error al guardar:", error);
-        resetGame();
+        console.error("Error al conectar con el servidor:", error);
+    } finally {
+        // Pase lo que pase, reiniciamos o redirigimos al final
+        resetGame(); 
     }
 }
