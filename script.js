@@ -89,7 +89,7 @@ function renderGame() {
 
 
 function resetGame() {
-    window.location.href = 'index.html';
+    window.location.href = 'hiScores.html';
 }
 
 function checkGameOver() {
@@ -141,9 +141,6 @@ function checkGameOver() {
         }, 100);
     }
 }
-
-
-renderGame();
 // Funciones del timer
 function startTimer() {
     if (!timerRunning) {
@@ -164,12 +161,18 @@ function updateTimer() {
     elapsedTime = Date.now() - startTime;
     const minutes = Math.floor(elapsedTime / 60000);
     const seconds = Math.floor((elapsedTime % 60000) / 1000);
-    document.getElementById('timer').textContent = 
-        `⏱️ ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    const centiseconds = Math.floor((elapsedTime % 1000) / 10);
+    document.getElementById("timer").textContent = 
+        `⏱️ ${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}.${centiseconds.toString().padStart(2, "0")}`;
 }
 
 function getFormattedTime() {
     const minutes = Math.floor(elapsedTime / 60000);
     const seconds = Math.floor((elapsedTime % 60000) / 1000);
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    const centiseconds = Math.floor((elapsedTime % 1000) / 10);
+    return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}.${centiseconds.toString().padStart(2, "0")}`;
 }
+
+
+
+renderGame();
