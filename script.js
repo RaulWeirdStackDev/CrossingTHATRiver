@@ -23,10 +23,10 @@ Notiflix.Report.init({
 
 function getImage(char) {
     const images = {
-        'farmer': 'assets/img/farmer.png',
-        'wolf': 'assets/img/wolf.png',
-        'sheep': 'assets/img/sheep.png',
-        'lettuce': 'assets/img/lettuce.png'
+        'farmer': './assets/img/farmer.png',
+        'wolf': './assets/img/wolf.png',
+        'sheep': './assets/img/sheep.png',
+        'lettuce': './assets/img/lettuce.png'
     };
     return `<img src="${images[char]}" alt="${char}" class="character-img">`;
 }
