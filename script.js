@@ -211,3 +211,7 @@ async function guardarPuntaje(nombre, tiempo) {
         resetGame(); 
     }
 }
+
+function reiniciarJuego() {
+    window.location.href = 'index.html';
+}
