@@ -187,4 +187,5 @@ html, body {
         padding: 10px 16px;
         font-size: 14px;
     }
+    body{overflow: hidden;}
 }
