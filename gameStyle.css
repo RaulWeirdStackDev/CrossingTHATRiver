@@ -13,14 +13,13 @@ header h3 {
     font-size: 14px;
     font-weight: normal;
     margin-top: -10px;
-    margin-bottom: 10px;
     letter-spacing: 1px;
 }
 
 #timer {
     font-size: 18px;
     color: #FFD54F;
-    margin-top: 10px;
+    margin-top: 3px;
     font-weight: normal;
     letter-spacing: 2px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
