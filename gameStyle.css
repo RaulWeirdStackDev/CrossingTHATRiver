@@ -10,6 +10,15 @@ body {
 
 header {text-align: center; color: white;}
 
+#timer {
+    font-size: 18px;
+    color: #FFD54F;
+    margin-top: 10px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 #game-container {
     display: flex;
     justify-content: center;

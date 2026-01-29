@@ -3,6 +3,12 @@ let rightShore = [];
 let boat = [];
 let boatPosition = 'left';
 
+// Variables del timer
+let timerInterval = null;
+let startTime = null;
+let elapsedTime = 0;
+let timerRunning = false;
+
 Notiflix.Report.init({
     titleFontSize: '24px',
     messageFontSize: '16px',
@@ -32,6 +38,11 @@ function getImage(char) {
 }
 
 function moveCharacter(character) {
+    // Iniciar el timer en el primer movimiento
+    if (!timerRunning) {
+        startTimer();
+    }
+
     if (boatPosition === 'left' && leftShore.includes(character) && boat.length < 2) {
         leftShore = leftShore.filter(item => item !== character);
         boat.push(character);
@@ -104,10 +115,12 @@ function checkGameOver() {
     }
 
     if (isVictory) {
+        stopTimer();
+        const finalTime = getFormattedTime();
         setTimeout(() => {
             Notiflix.Report.success(
                 '¡Felicidades! 🎉',
-                `<img src="${imageUrl}" style="width: 150px; margin: 15px auto; display: block; border-radius: 10px;"><br>${message}`,
+                `<img src="${imageUrl}" style="width: 150px; margin: 15px auto; display: block; border-radius: 10px;"><br>${message}<br><br>⏱️ Tiempo: ${finalTime}`,
                 'Volver al menú',
                 function() {
                     resetGame();
@@ -115,6 +128,7 @@ function checkGameOver() {
             );
         }, 100);
     } else if (isGameOver) {
+        stopTimer();
         setTimeout(() => {
             Notiflix.Report.failure(
                 'Game Over 😢',
@@ -130,3 +144,32 @@ function checkGameOver() {
 
 
 renderGame();
+// Funciones del timer
+function startTimer() {
+    if (!timerRunning) {
+        timerRunning = true;
+        startTime = Date.now() - elapsedTime;
+        timerInterval = setInterval(updateTimer, 100);
+    }
+}
+
+function stopTimer() {
+    if (timerRunning) {
+        timerRunning = false;
+        clearInterval(timerInterval);
+    }
+}
+
+function updateTimer() {
+    elapsedTime = Date.now() - startTime;
+    const minutes = Math.floor(elapsedTime / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000);
+    document.getElementById('timer').textContent = 
+        `⏱️ ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function getFormattedTime() {
+    const minutes = Math.floor(elapsedTime / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000);
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
