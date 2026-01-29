@@ -20,30 +20,62 @@
             <img src="./assets/img/btnScore.png" alt="Scores">
         </a>
     </div>
-<button id="btnInstrucciones" class="button-instrucciones">
-    📋 Instrucciones
-</button>
+    
+    <button id="btnInstrucciones" class="button-instrucciones">
+        📋 Instrucciones
+    </button>
 
-<!-- Modal de Instrucciones -->
-<div id="modalInstrucciones" class="modal">
-    <div class="modal-content-instrucciones">
-        <button class="modal-close" id="closeInstrucciones">&times;</button>
-        <img src="./assets/img/instrucciones.png" alt="Instrucciones del juego" class="instrucciones-img">
+    <!-- Modal de Instrucciones -->
+    <div id="modalInstrucciones" class="modal">
+        <div class="modal-content-instrucciones">
+            <button class="modal-close" id="closeInstrucciones">&times;</button>
+            <img src="./assets/img/instrucciones.png" alt="Instrucciones del juego" class="instrucciones-img">
+        </div>
     </div>
-</div>
-<script src="./modal.js"></script>
-<script>
-    if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then((registration) => {
-        console.log('SW registrado con éxito en el alcance:', registration.scope);
-      })
-      .catch((error) => {
-        console.error('Fallo al registrar el SW:', error);
-      });
-  });
-}
-</script>
+
+    <!-- Scripts -->
+    <script src="./modal.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', async () => {
+                try {
+                    const registration = await navigator.serviceWorker.register('/sw.js', {
+                        scope: '/',
+                        updateViaCache: 'none'
+                    });
+
+                    console.log('✅ SW registrado:', registration.scope);
+
+                    // Auto-actualización cada 30s
+                    setInterval(() => registration.update(), 30000);
+
+                    // Detectar nueva versión
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker?.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // Nueva versión disponible
+                                console.log('🔄 Nueva versión disponible');
+                                if (confirm('¡Hay una actualización! ¿Recargar ahora?')) {
+                                    newWorker.postMessage({ type: 'SKIP_WAITING' });
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    });
+
+                    // Recargar cuando el nuevo SW tome control
+                    navigator.serviceWorker.addEventListener('controllerchange', () => {
+                        window.location.reload();
+                    });
+
+                } catch (error) {
+                    console.error('❌ Error registrando SW:', error);
+                }
+            });
+        }
+    </script>
 </body>
 </html>

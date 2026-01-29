@@ -1,4 +1,6 @@
-const CACHE_NAME = 'crossing-that-river-v1';
+const CACHE_NAME = 'crossing-that-river-v2'; // ⚠️ Cambiado a v2 para forzar actualización
+const API_URL = 'https://riverbackend.onrender.com';
+
 const urlsToCache = [
   './',
   //intro y app
@@ -6,7 +8,6 @@ const urlsToCache = [
   './introStyle.css',
   './manifest.json',
   './modal.js',
-
 
   //pwa icons
   './pwa/icon-192.png',
@@ -41,74 +42,141 @@ const urlsToCache = [
   './score/scoreStyle.css',
 ];
 
-// Instalación: cachear todos los recursos
+// ═══════════════════════════════════════════════════════════
+// INSTALACIÓN: Cachear archivos estáticos
+// ═══════════════════════════════════════════════════════════
 self.addEventListener('install', (event) => {
-  console.log('Service Worker: Instalando...');
+  console.log('🔧 Service Worker: Instalando v2...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('Service Worker: Cacheando archivos');
+        console.log('📦 Service Worker: Cacheando archivos estáticos');
         return cache.addAll(urlsToCache);
       })
       .then(() => {
-        console.log('Service Worker: Todos los archivos cacheados');
+        console.log('✅ Service Worker: Archivos cacheados exitosamente');
         return self.skipWaiting(); // Activar inmediatamente
       })
       .catch((error) => {
-        console.error('Service Worker: Error al cachear:', error);
+        console.error('❌ Service Worker: Error al cachear:', error);
       })
   );
 });
 
-// Activación: limpiar cachés antiguos
+// ═══════════════════════════════════════════════════════════
+// ACTIVACIÓN: Limpiar cachés antiguos
+// ═══════════════════════════════════════════════════════════
 self.addEventListener('activate', (event) => {
-  console.log('Service Worker: Activando...');
+  console.log('🚀 Service Worker: Activando...');
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
-            console.log('Service Worker: Eliminando caché antiguo:', cacheName);
+            console.log('🗑️ Service Worker: Eliminando caché antiguo:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
     }).then(() => {
-      console.log('Service Worker: Activado y reclamando clientes');
-      return self.clients.claim(); // Tomar control inmediato
+      console.log('✅ Service Worker: Activado y reclamando clientes');
+      return self.clients.claim();
     })
   );
 });
 
-// Fetch: estrategia Cache First con Network Fallback
+// ═══════════════════════════════════════════════════════════
+// FETCH: Estrategia híbrida
+// ═══════════════════════════════════════════════════════════
 self.addEventListener('fetch', (event) => {
+  const { request } = event;
+  const url = new URL(request.url);
+
+  // ────────────────────────────────────────────────
+  // 🚨 REGLA CRÍTICA: NUNCA cachear la API del backend
+  // ────────────────────────────────────────────────
+  if (url.origin === API_URL || request.url.includes('riverbackend.onrender.com')) {
+    console.log('🌐 Service Worker: Petición a API - SIEMPRE desde red:', request.url);
+    
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          console.log('✅ Service Worker: Respuesta de API recibida');
+          return response;
+        })
+        .catch(error => {
+          console.error('❌ Service Worker: Error en API:', error);
+          // Respuesta de error para modo offline
+          return new Response(
+            JSON.stringify({ 
+              error: 'Sin conexión a internet',
+              offline: true 
+            }),
+            { 
+              status: 503,
+              statusText: 'Service Unavailable',
+              headers: { 
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-store'
+              }
+            }
+          );
+        })
+    );
+    return; // ⚠️ IMPORTANTE: Salir aquí para no cachear
+  }
+
+  // ────────────────────────────────────────────────
+  // 📦 Cache First para archivos estáticos
+  // ────────────────────────────────────────────────
   event.respondWith(
-    caches.match(event.request)
+    caches.match(request)
       .then((cachedResponse) => {
-        // Si está en caché, devolverlo
         if (cachedResponse) {
-          console.log('Service Worker: Sirviendo desde caché:', event.request.url);
+          console.log('📦 Service Worker: Desde caché:', request.url);
           return cachedResponse;
         }
         
-        // Si no está en caché, intentar obtenerlo de la red
-        console.log('Service Worker: Obteniendo de la red:', event.request.url);
-        return fetch(event.request)
+        console.log('🌐 Service Worker: Descargando:', request.url);
+        return fetch(request)
           .then((networkResponse) => {
-            // Opcionalmente, cachear la respuesta de red
+            // Solo cachear respuestas exitosas
             if (networkResponse && networkResponse.status === 200) {
               const responseClone = networkResponse.clone();
               caches.open(CACHE_NAME).then((cache) => {
-                cache.put(event.request, responseClone);
+                cache.put(request, responseClone);
               });
             }
             return networkResponse;
           })
           .catch((error) => {
-            console.error('Service Worker: Error de red:', error);
-            // Aquí podrías devolver una página offline personalizada
-            // return caches.match('/offline.html');
+            console.error('❌ Service Worker: Error de red:', error);
+            // Página offline de fallback
+            if (request.destination === 'document') {
+              return caches.match('./index.html');
+            }
           });
       })
   );
+});
+
+// ═══════════════════════════════════════════════════════════
+// MENSAJE: Comunicación con la app
+// ═══════════════════════════════════════════════════════════
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    console.log('⚡ Service Worker: Activación forzada');
+    self.skipWaiting();
+  }
+  
+  if (event.data && event.data.type === 'CLEAR_CACHE') {
+    console.log('🗑️ Service Worker: Limpiando caché por solicitud');
+    event.waitUntil(
+      caches.keys().then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => caches.delete(cacheName))
+        );
+      })
+    );
+  }
 });
