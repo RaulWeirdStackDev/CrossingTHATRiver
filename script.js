@@ -114,20 +114,37 @@ function checkGameOver() {
         isVictory = true;
     }
 
-    if (isVictory) {
-        stopTimer();
-        const finalTime = getFormattedTime();
-        setTimeout(() => {
-            Notiflix.Report.success(
-                '¡Felicidades! 🎉',
-                `<img src="${imageUrl}" style="width: 150px; margin: 15px auto; display: block; border-radius: 10px;"><br>${message}<br><br>⏱️ Tiempo: ${finalTime}`,
-                'Volver al menú',
-                function() {
-                    resetGame();
-                }
-            );
-        }, 100);
-    } else if (isGameOver) {
+if (isVictory) {
+    stopTimer();
+    const finalTime = getFormattedTime();
+    const tiempoMs = elapsedTime; 
+
+    setTimeout(() => {
+        // 1. Mostramos primero la pantalla de éxito con la imagen
+        Notiflix.Report.success(
+            '¡Felicidades! 🎉',
+            `<img src="${imageUrl}" style="width: 150px; margin: 15px auto; display: block; border-radius: 10px;"><br>${message}<br><br>⏱️ Tiempo: ${finalTime}`,
+            'Registrar mi récord',
+            function() {
+                // 2. Al cerrar, pedimos el nombre
+                Notiflix.Confirm.prompt(
+                    'Ranking de Granjeros',
+                    'Introduce tu nombre para el Hall of Fame:',
+                    '',
+                    'Guardar',
+                    'Omitir',
+                    function(nombre) {
+                        const nombreFinal = nombre.trim().substring(0, 8) || "Anónimo";
+                        guardarPuntaje(nombreFinal, tiempoMs);
+                    },
+                    function() {
+                        resetGame();
+                    }
+                );
+            }
+        );
+    }, 100);
+} else if (isGameOver) {
         stopTimer();
         setTimeout(() => {
             Notiflix.Report.failure(
@@ -176,3 +193,17 @@ function getFormattedTime() {
 
 
 renderGame();
+
+async function guardarPuntaje(nombre, tiempo) {
+    try {
+        await fetch('http://localhost:3007/puntajes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre, tiempo })
+        });
+        resetGame(); // Ahora sí redirige a hiScores.html
+    } catch (error) {
+        console.error("Error al guardar:", error);
+        resetGame();
+    }
+}

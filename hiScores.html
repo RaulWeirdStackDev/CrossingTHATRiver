@@ -3,14 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crossing THAT River</title>
+    <title>Crossing THAT River - High Scores</title>
     <link rel="stylesheet" href="./scoreStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body class="scoreBody">
-        <button class="backButton">
-        <a href="./index.html" class="startButton">
-            <img src="./assets/img/btnBack.png" alt="">
+    
+    <div class="score-board">
+        <ul id="score-list">
+            <li>Cargando...</li>
+        </ul>
+    </div>
+
+    <button class="backButton">
+        <a href="./index.html">
+            <img src="./assets/img/btnBack.png" alt="Volver">
         </a>
     </button>
+
+    <script>
+        // Función para convertir milisegundos a formato MM:SS.CC
+        function formatMs(ms) {
+            const minutes = Math.floor(ms / 60000);
+            const seconds = Math.floor((ms % 60000) / 1000);
+            const centiseconds = Math.floor((ms % 1000) / 10);
+            return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}.${centiseconds.toString().padStart(2, "0")}`;
+        }
+
+        async function cargarPuntajes() {
+            try {
+                const response = await fetch('http://localhost:3007/puntajes');
+                const scores = await response.json();
+                
+                const list = document.getElementById('score-list');
+                
+                if (scores.length === 0) {
+                    list.innerHTML = "<li>No hay récords aún</li>";
+                    return;
+                }
+
+                // Ordenar por tiempo (menor a mayor) y tomar los top 5
+                const topScores = scores.sort((a, b) => a.tiempo - b.tiempo).slice(0, 5);
+
+                list.innerHTML = topScores.map(s => `
+                    <li>
+                        <span class="name">${s.nombre.toUpperCase()}</span>
+                        <span class="time">${formatMs(s.tiempo)}</span>
+                    </li>
+                `).join('');
+                
+            } catch (error) {
+                console.error("Error al cargar puntajes:", error);
+                document.getElementById('score-list').innerHTML = "<li>Error al conectar</li>";
+            }
+        }
+
+        window.onload = cargarPuntajes;
+    </script>
 </body>
 </html>
