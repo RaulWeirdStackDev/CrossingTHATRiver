@@ -1,0 +1,180 @@
+/* ═══════════════════════════════════════════════════════════
+   PWA INSTALL BANNER - VERSIÓN MINIMALISTA
+   ═══════════════════════════════════════════════════════════ */
+
+.pwa-install-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    
+    width: 90%;
+    max-width: 400px;
+    
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    
+    padding: 16px;
+    
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.pwa-install-banner.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.pwa-banner-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+}
+
+.pwa-close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 20px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: color 0.2s ease;
+}
+
+.pwa-close-btn:hover {
+    color: white;
+}
+
+.pwa-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.pwa-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+
+.pwa-text {
+    flex: 1;
+    padding-right: 24px; /* Espacio para el botón X */
+}
+
+.pwa-text h3 {
+    margin: 0 0 4px 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.pwa-text p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.7;
+    line-height: 1.3;
+}
+
+.pwa-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.pwa-install-btn,
+.pwa-later-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.pwa-install-btn {
+    background: white;
+    color: #000;
+}
+
+.pwa-install-btn:hover {
+    background: #f0f0f0;
+}
+
+.pwa-later-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.pwa-later-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Mensaje de éxito minimalista */
+.pwa-success-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    z-index: 10000;
+    
+    background: rgba(16, 185, 129, 0.95);
+    backdrop-filter: blur(10px);
+    color: white;
+    
+    padding: 12px 24px;
+    border-radius: 12px;
+    
+    font-size: 14px;
+    font-weight: 600;
+    
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.pwa-success-message.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Responsive minimalista */
+@media (max-width: 480px) {
+    .pwa-install-banner {
+        width: calc(100% - 40px);
+        bottom: 10px;
+    }
+    
+    .pwa-banner-content {
+        flex-wrap: wrap;
+    }
+    
+    .pwa-buttons {
+        flex-direction: row;
+        width: 100%;
+        margin-top: 8px;
+    }
+    
+    .pwa-install-btn,
+    .pwa-later-btn {
+        flex: 1;
+    }
+}

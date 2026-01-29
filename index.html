@@ -6,6 +6,11 @@
     <meta name="theme-color" content="#007bff">
     <title>Crossing THAT River</title>
     <link rel="stylesheet" href="./introStyle.css">
+    
+    <!-- Estilos del banner de instalación PWA -->
+    <link rel="stylesheet" href="./pwa-install.css">
+    <!-- Alternativa minimalista: <link rel="stylesheet" href="./pwa-install-minimal.css"> -->
+    
     <link rel="shortcut icon" href="./assets/img/wolf.png" type="image/x-icon">
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./pwa/icon-192.png">
@@ -33,8 +38,14 @@
         </div>
     </div>
 
+    <!-- OPCIONAL: Botón manual de instalación (flotante) -->
+    <!-- <button id="manual-install-btn">📱 Instalar App</button> -->
+
     <!-- Scripts -->
     <script src="./modal.js"></script>
+    
+    <!-- Script de instalación PWA -->
+    <script src="./pwa-install.js"></script>
     
     <!-- Service Worker Registration -->
     <script>
@@ -56,7 +67,6 @@
                         const newWorker = registration.installing;
                         newWorker?.addEventListener('statechange', () => {
                             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                // Nueva versión disponible
                                 console.log('🔄 Nueva versión disponible');
                                 if (confirm('¡Hay una actualización! ¿Recargar ahora?')) {
                                     newWorker.postMessage({ type: 'SKIP_WAITING' });
