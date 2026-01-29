@@ -196,7 +196,7 @@ renderGame();
 
 async function guardarPuntaje(nombre, tiempo) {
     try {
-        await fetch('http://localhost:3007/puntajes', {
+        await fetch('https://riverbackend.onrender.com/puntajes', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nombre, tiempo })
