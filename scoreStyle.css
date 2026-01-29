@@ -80,3 +80,16 @@ html, body {
         height: 20%;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .score-board {
+        top: 55.5%; /* Subimos el cuadro (estaba en 73%) */
+        width: 60%; /* Le damos un poco más de ancho para que no se amontone */
+        height: 25%; /* Un poco más de alto para el scroll interno si hay muchos nombres */
+    }
+
+    #score-list li {
+        font-size: 0.7rem; /* Ajustamos el tamaño de fuente para que no rompa el diseño */
+        margin-bottom: 5px;
+    }
+}
