@@ -6,53 +6,39 @@ const urlsToCache = [
   './introStyle.css',
   './manifest.json',
   './modal.js',
-  './',
-  './icon-512.png',
+
+
+  //pwa icons
+  './pwa/icon-192.png',
+  './pwa/icon-512.png',
+
+  //assets
+  './assets/img/boat.png',
+  './assets/img/btnBack.png',
+  './assets/img/btnScore.png',
+  './assets/img/btnStart.png',
+  './assets/img/btnStart2.png',
+  './assets/img/defeatS.png',
+  './assets/img/defeatW.png',
+  './assets/img/farmer.png',
+  './assets/img/hiScores.png',
   './assets/img/intro.png',
   './assets/img/instrucciones.png',
-  // Página principal
-  // Comida
-  '/comida/index.html',
-  '/comida/assets/img/fideos.jpeg',
-  '/comida/assets/img/galletas.png',
-  '/comida/assets/img/jugo.png',
-  '/comida/assets/img/manzana.png',
-  '/comida/assets/img/naranja.png',
-  '/comida/assets/img/pan.png',
-  '/comida/assets/img/platano.png',
-  '/comida/assets/img/yogurt.png',
-  // Recursos públicos
-  '/public/emociones.png',
-  '/public/auto.png',
-  '/public/logo.png',  
-  '/public/comida.png',
-  '/public/ayuda.png',
-  '/public/volver.png',
-  // Emociones
-  '/emociones/index.html',
-  '/emociones/assets/img/calor.png',
-  '/emociones/assets/img/contento.png',
-  '/emociones/assets/img/dolor_cabeza.png',
-  '/emociones/assets/img/dolor_diente.png',
-  '/emociones/assets/img/dolor_estomago.png',
-  '/emociones/assets/img/dolor_pie.png',
-  '/emociones/assets/img/frio.png',
-  '/emociones/assets/img/triste.png',
-  // Viajes
-  '/viajes/index.html',
-  '/viajes/assets/img/auto.jpeg',
-  '/viajes/assets/img/caminar.png',
-  '/viajes/assets/img/parque.png',
-  '/viajes/assets/img/perro.png',
-  '/viajes/assets/img/escuela.png',
-  '/viajes/assets/img/trabajar.png',
-  // Ayuda
-  '/ayuda/index.html',
-  '/ayuda/assets/img/calcetines.png',
-  '/ayuda/assets/img/hacer_Cama.png',
-  '/ayuda/assets/img/ducha.png',
-  '/ayuda/assets/img/polera.png',
-  '/ayuda/assets/img/pantalon.png',
+  './assets/img/lettuce.png',
+  './assets/img/river.png',
+  './assets/img/riverDesktop.png',
+  './assets/img/sheep.png',
+  './assets/img/victory.png',
+  './assets/img/wolf.png',
+
+  // Game
+  './game/game.html',
+  './game/gameStyle.css',
+  './game/gameScript.js',
+  
+  // Score
+  './score/hiScores.html',
+  './score/scoreStyle.css',
 ];
 
 // Instalación: cachear todos los recursos

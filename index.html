@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#007bff">
     <title>Crossing THAT River</title>
     <link rel="stylesheet" href="./introStyle.css">
     <link rel="shortcut icon" href="./assets/img/wolf.png" type="image/x-icon">
     <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./pwa/icon-192.png">
 </head>
 <body class="introBody">
     <div class="buttonContainer">
@@ -30,5 +32,18 @@
     </div>
 </div>
 <script src="./modal.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then((registration) => {
+        console.log('SW registrado con éxito en el alcance:', registration.scope);
+      })
+      .catch((error) => {
+        console.error('Fallo al registrar el SW:', error);
+      });
+  });
+}
+</script>
 </body>
 </html>
