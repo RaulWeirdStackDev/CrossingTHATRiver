@@ -77,10 +77,10 @@ function renderGame() {
     const crossBtn = document.getElementById('cross-button');
 
     if (boatPosition === 'left') {
-        crossBtn.innerHTML = "Llevar ➡";
+        crossBtn.innerHTML = "Girar ➡";
         boatEl.classList.remove('boat-flipped');
     } else {
-        crossBtn.innerHTML = "Llevar ⬅";
+        crossBtn.innerHTML = "Girar ⬅";
         boatEl.classList.add('boat-flipped');
     }
     checkGameOver();
