@@ -67,10 +67,45 @@ html, body {
 .backButton img {
     width: 60px;
     transition: transform 0.2s;
+    border-radius: 10px; /* <--- Aquí sucede la magia */
+    /* Opcional: si la imagen no es cuadrada, usa esto para asegurar el redondeo */
+    object-fit: cover; 
 }
 
 .backButton img:hover {
     transform: scale(1.1);
+}
+
+/* Oro con borde negro */
+#score-list li:nth-child(1) .name { 
+    color: #FFD700; 
+    text-shadow: 
+        -1px -1px 0 #000,  
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000; /* Esto crea un borde sólido en las 4 esquinas */
+         transform: scale(1.05); /* Lo hace sutilmente más grande */
+    filter: drop-shadow(0px 0px 5px rgba(255, 215, 0, 0.5)); /* Un aura dorada suave */
+} 
+
+/* Plata */
+#score-list li:nth-child(2) .name { 
+    color: #C0C0C0; 
+  text-shadow: 
+        -1px -1px 0 #000,  
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000; 
+} 
+
+/* Bronce */
+#score-list li:nth-child(3) .name { 
+    color: #CD7F32; 
+text-shadow: 
+        -1px -1px 0 #000,  
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
 }
 
 /* Ajustes para pantallas grandes */
