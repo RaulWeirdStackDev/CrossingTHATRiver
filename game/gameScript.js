@@ -29,10 +29,10 @@ Notiflix.Report.init({
 
 function getImage(char) {
     const images = {
-        'farmer': './assets/img/farmer.png',
-        'wolf': './assets/img/wolf.png',
-        'sheep': './assets/img/sheep.png',
-        'lettuce': './assets/img/lettuce.png'
+        'farmer': '../assets/img/farmer.png',
+        'wolf': '../assets/img/wolf.png',
+        'sheep': '../assets/img/sheep.png',
+        'lettuce': '../assets/img/lettuce.png'
     };
     return `<img src="${images[char]}" alt="${char}" class="character-img">`;
 }
@@ -89,7 +89,7 @@ function renderGame() {
 
 
 function resetGame() {
-    window.location.href = 'hiScores.html';
+    window.location.href = '../score/hiScores.html';
 }
 
 function checkGameOver() {
@@ -101,16 +101,16 @@ function checkGameOver() {
     if ((leftShore.includes('wolf') && leftShore.includes('sheep') && !leftShore.includes('farmer')) ||
         (rightShore.includes('wolf') && rightShore.includes('sheep') && !rightShore.includes('farmer'))) {
         message = '¡El lobo se comió a la oveja!';
-        imageUrl = 'assets/img/defeatW.png';
+        imageUrl = '../assets/img/defeatW.png';
         isGameOver = true;
     } else if ((leftShore.includes('sheep') && leftShore.includes('lettuce') && !leftShore.includes('farmer')) ||
         (rightShore.includes('sheep') && rightShore.includes('lettuce') && !rightShore.includes('farmer'))) {
         message = '¡La oveja se comió la lechuga!';
-        imageUrl = 'assets/img/defeatS.png';
+        imageUrl = '../assets/img/defeatS.png';
         isGameOver = true;
     } else if (rightShore.length === 4) {
         message = '¡Has cruzado con éxito el río!';
-        imageUrl = 'assets/img/victory.png';
+        imageUrl = '../assets/img/victory.png';
         isVictory = true;
     }
 
@@ -213,5 +213,5 @@ async function guardarPuntaje(nombre, tiempo) {
 }
 
 function reiniciarJuego() {
-    window.location.href = 'index.html';
+    window.location.href = '../index.html';
 }

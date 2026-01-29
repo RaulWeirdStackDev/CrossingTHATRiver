@@ -35,7 +35,7 @@ header h3 {
     margin: 10px;
     
     /* Nueva configuración de fondo */
-    background-image: url('./assets/img/river.png'); /* Asegúrate de que la ruta sea correcta */
+    background-image: url('../assets/img/river.png'); /* Asegúrate de que la ruta sea correcta */
     background-size: cover;
     background-position: center;
     border-radius: 10px; /* Opcional, para redondear las esquinas del tablero */
@@ -65,7 +65,7 @@ header h3 {
 #boat {
     width: 90px;
     height: 40px;
-    background-image: url('./assets/img/boat.png');
+    background-image: url('../assets/img/boat.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -194,7 +194,7 @@ footer {
         height: 500px;
         margin: 30px auto;
         
-        background-image: url('./assets/img/riverDesktop.png'); 
+        background-image: url('../assets/img/riverDesktop.png'); 
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -235,7 +235,7 @@ footer {
     #boat {
         width: 180px;
         height: 100px;
-        background-image: url('./assets/img/boat.png');
+        background-image: url('../assets/img/boat.png');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
