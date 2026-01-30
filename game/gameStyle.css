@@ -171,6 +171,15 @@ button:disabled {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    position: relative;
+}
+
+/* Botón reiniciar alejado en móvil */
+#resetBtn {
+    position: fixed;
+    bottom: 70px;
+    left: 10px;
+    z-index: 1000;
 }
 
 a {
@@ -283,6 +292,13 @@ footer {
     align-items: center;
     gap: 12px;
 }
+
+    /* Restaurar posición normal del botón reiniciar en desktop */
+    #resetBtn {
+        position: relative;
+        bottom: auto;
+        left: auto;
+    }
 
 header h3{
     font-size: 24px;
